@@ -23,7 +23,7 @@ api.get("/cars", async function (req, res, next) {
   } catch (error) {
     //TODO status code really depends on which error happened.
     logger.error(JSON.stringify(error));
-    res.status(400).json("bad request");
+    res.status(400).json("bad request ");
   }
 });
 module.exports = api;
