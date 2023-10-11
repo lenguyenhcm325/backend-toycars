@@ -1,0 +1,47 @@
+version: 0.2
+
+env:
+  parameter-store:
+    MONGODB_URI: /toycars/dev/backend/MONGODB_URI
+    DATABASE_NAME: /toycars/dev/backend/DATABASE_NAME
+    COLLECTION_NAME: /toycars/dev/backend/COLLECTION_NAME
+    ALL_PRODUCTS_COLLECTION_NAME: /toycars/dev/backend/ALL_PRODUCTS_COLLECTION_NAME
+    PORT: /toycars/dev/backend/PORT
+    GOOGLE_CLIENT_ID: /toycars/dev/backend/GOOGLE_CLIENT_ID
+    STRIPE_API_KEY: /toycars/dev/backend/STRIPE_API_KEY
+    IDENTITY_POOL_ID: /toycars/dev/backend/IDENTITY_POOL_ID
+    AWS_REGION: /toycars/dev/backend/AWS_REGION
+    IDENTIY_POOL_REGION: /toycars/dev/backend/IDENTIY_POOL_REGION
+    USER_POOL_ID: /toycars/dev/backend/USER_POOL_ID
+    USER_POOL_WEB_CLIENT_ID: /toycars/dev/backend/USER_POOL_WEB_CLIENT_ID
+    OAUTH_DOMAIN: /toycars/dev/backend/OAUTH_DOMAIN
+    ELASTICSEARCH_NODE_ENDPOINT: /toycars/dev/backend/ELASTICSEARCH_NODE_ENDPOINT
+    ELASTICSEARCH_USERNAME: /toycars/dev/backend/ELASTICSEARCH_USERNAME
+    ELASTICSEARCH_PASSWORD: /toycars/dev/backend/ELASTICSEARCH_PASSWORD
+    FIREBASE_API_KEY: /toycars/dev/backend/FIREBASE_API_KEY
+    FIREBASE_AUTH_DOMAIN: /toycars/dev/backend/FIREBASE_AUTH_DOMAIN
+    FIREBASE_PROJECT_ID: /toycars/dev/backend/FIREBASE_PROJECT_ID
+    FIREBASE_STORAGE_BUCKET: /toycars/dev/backend/FIREBASE_STORAGE_BUCKET
+    FIREBASE_MESSAGING_SENDER_ID: /toycars/dev/backend/FIREBASE_MESSAGING_SENDER_ID
+    FIREBASE_APP_ID: /toycars/dev/backend/FIREBASE_APP_ID
+    FIREBASE_MEASUREMENT_ID: /toycars/dev/backend/FIREBASE_MEASUREMENT_ID
+    IAM_ACCESS_KEY_ID: /toycars/dev/backend/IAM_ACCESS_KEY_ID
+    IAM_SECRET_ACCESS_KEY: /toycars/dev/backend/IAM_SECRET_ACCESS_KEY
+    SES_FROM_EMAIL: /toycars/dev/backend/SES_FROM_EMAIL
+    SES_FROM_EMAIL_ARN: /toycars/dev/backend/SES_FROM_EMAIL_ARN
+    SES_REPLY_TO_EMAIL: /toycars/dev/backend/SES_REPLY_TO_EMAIL
+phases:
+  pre_build:
+    commands:
+      - echo Build started on `date`
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+  build:
+    commands:
+      - echo Building the Docker image ...
+      - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
+      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+    post_build:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image ...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
