@@ -2,6 +2,8 @@ var AmazonCognitoIdentity = require("amazon-cognito-identity-js");
 var CognitoUserPool = AmazonCognitoIdentity.CognitoUserPool;
 require("dotenv").config();
 let Auth = require("./amplify");
+console.log("this is the userpoolid");
+console.log(process.env.USER_POOL_ID);
 var poolData = {
   UserPoolId: process.env.USER_POOL_ID, // Your user pool id here
   ClientId: process.env.USER_POOL_WEB_CLIENT_ID, // Your client id here
