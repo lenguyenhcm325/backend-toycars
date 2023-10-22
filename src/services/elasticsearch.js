@@ -12,7 +12,7 @@ const client = new Client({
     password: process.env.ELASTICSEARCH_PASSWORD,
   },
   tls: {
-    ca: fs.readFileSync("./http_ca.crt"),
+    ca: fs.readFileSync(`${__dirname}/http_ca.crt`),
     rejectUnauthorized: false,
   },
 });

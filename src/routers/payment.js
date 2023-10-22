@@ -12,7 +12,7 @@ const payment = express.Router();
 const SES = require("../services/ses");
 const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 
-const YOUR_DOMAIN = "http://localhost:5173";
+const YOUR_DOMAIN = process.env.FRONTEND_ENDPOINT;
 payment.post("/create-checkout-session", async (req, res) => {
   const checkoutItemsReqBody = req.body;
   logger.info(`checkoutItemsReqBody ${JSON.stringify(checkoutItemsReqBody)}`);

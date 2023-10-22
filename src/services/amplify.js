@@ -1,6 +1,8 @@
 const { Auth, Amplify } = require("aws-amplify");
 require("dotenv").config();
 
+const frontendEndpoint = process.env.FRONTEND_ENDPOINT;
+
 Amplify.configure({
   Auth: {
     // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
@@ -29,8 +31,8 @@ Amplify.configure({
     oauth: {
       domain: process.env.OAUTH_DOMAIN,
       scope: ["given_name", "email", "family_name"],
-      redirectSignIn: "http://localhost:5173/",
-      redirectSignOut: "http://localhost:5173/",
+      redirectSignIn: frontendEndpoint,
+      redirectSignOut: frontendEndpoint,
       responseType: "code", // or 'token', note that REFRESH token will only be generated when the responseType is code
     },
   },
