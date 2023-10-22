@@ -27,6 +27,10 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+app.get("/healthcheck", (req, res) => {
+  res.status(200).send("Healthy");
+});
+
 const port = process.env.PORT;
 app.listen(port, () => {
   logger.info(`ToyCars backend listening on port ${port}`);
