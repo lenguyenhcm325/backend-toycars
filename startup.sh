@@ -4,7 +4,7 @@ CHECK_INTERVAL=5
 
 check_elasticsearch() {
   # Use curl to get both the HTTP status code and the response body
-  RESPONSE=$(curl --silent --write-out "HTTPSTATUS:%{http_code}" "$ELASTICSEARCH_HOST:$ELASTICSEARCH_PORT/_cluster/health")
+  RESPONSE=$(curl -u $ELASTICSEARCH_USERNAME:$ELASTICSEARCH_PASSWORD --silent --write-out "HTTPSTATUS:%{http_code}" "$ELASTICSEARCH_HOST:$ELASTICSEARCH_PORT/_cluster/health")
   
   # Extract the HTTP status code from the response
   HTTP_STATUS=$(echo $RESPONSE | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
