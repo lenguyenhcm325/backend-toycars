@@ -1,7 +1,5 @@
 #!/bin/bash
 
-ELASTICSEARCH_HOST="elasticsearch.toycars-app-namespace"
-ELASTICSEARCH_PORT=9200
 CHECK_INTERVAL=5
 
 check_elasticsearch() {
