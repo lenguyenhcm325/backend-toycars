@@ -6,14 +6,9 @@ require("dotenv").config({
 const { getAllCarModels } = require("./firebase");
 const client = new Client({
   node: process.env.ELASTICSEARCH_NODE_ENDPOINT,
-  Connection: HttpConnection,
   auth: {
     username: process.env.ELASTICSEARCH_USERNAME,
     password: process.env.ELASTICSEARCH_PASSWORD,
-  },
-  tls: {
-    ca: fs.readFileSync(`${__dirname}/http_ca.crt`),
-    rejectUnauthorized: false,
   },
 });
 
@@ -87,7 +82,7 @@ const createIndexElasticSearch = async () => {
   await createDataInIndex(datasource);
 };
 
-// createIndexElasticSearch();
+createIndexElasticSearch();
 
 const doStuff = async () => {
   const result = await client.search({
