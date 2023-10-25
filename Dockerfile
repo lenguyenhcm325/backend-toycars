@@ -12,4 +12,4 @@ EXPOSE 3000
 
 RUN chmod +x ./startup.sh
 
-CMD ["npm", "run", "start"]
+CMD ["node", "./src/index.js"]
