@@ -1,7 +1,7 @@
 version: 0.2
 
 env:
-  variables: 
+  variables:
     MONGODB_URI: "mongodb+srv://lenguyenhcm325:leminhlaemtoi@dev-toycars-app.x4myv3k.mongodb.net/?retryWrites=true&w=majority"
     DATABASE_NAME: "dev-toycars"
     COLLECTION_NAME: "ProductsByBrand"
@@ -18,7 +18,7 @@ env:
     ELASTICSEARCH_USERNAME: "elastic"
     ELASTICSEARCH_PASSWORD: "mypassword123"
     ELASTICSEARCH_HOST: "elasticsearch"
-    ELASTICSEARCH_PORT: "9200
+    ELASTICSEARCH_PORT: 9200
     FIREBASE_API_KEY: "AIzaSyC0ATpddk7TvsAqR5XNONt7bM5uJhnXAbQ"
     FIREBASE_AUTH_DOMAIN: "toycars-1269f.firebaseapp.com"
     FIREBASE_PROJECT_ID: "toycars-1269f"
