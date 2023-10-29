@@ -31,7 +31,10 @@ ENV MONGODB_URI="mongodb+srv://lenguyenhcm325:leminhlaemtoi@dev-toycars-app.x4my
     SES_FROM_EMAIL="lenguyenhcm325@gmail.com" \
     SES_FROM_EMAIL_ARN="arn:aws:ses:eu-central-1:312290079196:identity/lenguyenhcm325@gmail.com" \
     SES_REPLY_TO_EMAIL="lenguyenhcm0711@gmail.com" \ 
-    FRONTEND_ENDPOINT="http://18.194.12.173"
+    FRONTEND_ENDPOINT="http://18.194.12.173" \
+    ELASTIC_CLOUD_ID=toycars-es:ZXUtY2VudHJhbC0xLmF3cy5jbG91ZC5lcy5pbyQ3ZjNmYTdiNzk5MjQ0NDUxYThjODdmNTljNGQwMzgyZSRmODdiNDE1NmE4ZTQ0NTQ0OGM0ZWMyOWU1Y2U0ODJjOQ== \
+    ELASTIC_CLOUD_USERNAME=elastic \
+    ELASTIC_CLOUD_PASSWORD=5lIfa8GSIiAnAdZt9XkpxQT3
 
 COPY package*.json ./
 
