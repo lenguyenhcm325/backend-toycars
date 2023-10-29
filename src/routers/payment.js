@@ -44,10 +44,10 @@ payment.post("/create-checkout-session", async (req, res) => {
     logger.info("checkout session created successfully");
     logger.info(`session ${JSON.stringify(session)}`);
     logger.info("url returned " + session.url);
+    res.json({ url: session.url });
   } catch (error) {
     logger.error(JSON.stringify(error));
   }
-  res.json({ url: session.url });
 });
 
 payment.post("/webhook", (req, res) => {
