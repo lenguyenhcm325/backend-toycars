@@ -30,7 +30,8 @@ ENV MONGODB_URI="mongodb+srv://lenguyenhcm325:leminhlaemtoi@dev-toycars-app.x4my
     IAM_SECRET_ACCESS_KEY="vjZXcoehL3F8PYsKy5ighGBDlEG6ZhYpQxNzH2b+" \
     SES_FROM_EMAIL="lenguyenhcm325@gmail.com" \
     SES_FROM_EMAIL_ARN="arn:aws:ses:eu-central-1:312290079196:identity/lenguyenhcm325@gmail.com" \
-    SES_REPLY_TO_EMAIL="lenguyenhcm0711@gmail.com"
+    SES_REPLY_TO_EMAIL="lenguyenhcm0711@gmail.com" \ 
+    FRONTEND_ENDPOINT="http://18.194.12.173"
 
 COPY package*.json ./
 
