@@ -13,6 +13,7 @@ const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 const parsePriceToFloat = require("../utils/parse-price-to-float");
 const stringNormalizer = require("../utils/string-normalizer");
 const { initializeApp } = require("firebase/app");
+// const { loggers } = require("winston");
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -100,7 +101,7 @@ const getPriceAndProductId = async (flattenNameWithoutSpace) => {
     // stripePriceId
     throw new Error("invalid item");
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -142,7 +143,40 @@ const populateWithProductAndPriceId = async () => {
   }
 };
 
+const existsSessionIdInFS = async (sessionId) => {
+  try {
+    const sessionDocRef = doc(
+      db,
+      process.env.PAYMENT_SESSIONS_COLLECTION,
+      sessionId
+    );
+    const sessionDocSnapshot = await getDoc(sessionDocRef);
+    if (sessionDocSnapshot.exists()) {
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.error(error);
+    return true;
+  }
+};
+
+const addSessionIdToFS = async (sessionId) => {
+  try {
+    await setDoc(doc(db, process.env.PAYMENT_SESSIONS_COLLECTION, sessionId), {
+      flushed: true,
+    });
+    console.log(
+      `has set ${sessionId} into payment session collection on Firestore`
+    );
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 module.exports = {
   getAllCarModels,
   getPriceAndProductId,
+  existsSessionIdInFS,
+  addSessionIdToFS,
 };
