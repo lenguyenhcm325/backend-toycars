@@ -1,16 +1,15 @@
 const express = require("express");
 const Logger = require("../services/winston.js");
 const logger = Logger(__filename);
-const createProductAndPrice = require("../services/one-time-stripe");
 require("dotenv").config();
 const {
   createOrderConfirmationHTML,
 } = require("../services/confirmation-email");
 const stripeAPI = require("../services/stripe");
 const {
-  getPriceAndProductId,
   existsSessionIdInFS,
   addSessionIdToFS,
+  createItemsWithPriceId,
 } = require("../services/firebase");
 const payment = express.Router();
 const SES = require("../services/ses");
@@ -20,21 +19,20 @@ const YOUR_DOMAIN = process.env.FRONTEND_ENDPOINT;
 payment.post("/create-checkout-session", async (req, res) => {
   const checkoutItemsReqBody = req.body;
   logger.info(`checkoutItemsReqBody ${JSON.stringify(checkoutItemsReqBody)}`);
-  let itemWithPriceIdList = [];
+  let itemWithPriceIdList = await createItemsWithPriceId(checkoutItemsReqBody);
 
-  for (const item of checkoutItemsReqBody) {
-    const flattenNameWithoutSpace = Object.keys(item)[0];
-    const quantity = item[flattenNameWithoutSpace];
-    const { stripePriceId } = await getPriceAndProductId(
-      flattenNameWithoutSpace
-    );
-    itemWithPriceIdList.push({
-      price: stripePriceId,
-      quantity: quantity,
-    });
-  }
+  // for (const item of checkoutItemsReqBody) {
+  //   const flattenNameWithoutSpace = Object.keys(item)[0];
+  //   const quantity = item[flattenNameWithoutSpace];
+  //   const { stripePriceId } = await getPriceAndProductId(
+  //     flattenNameWithoutSpace
+  //   );
+  //   itemWithPriceIdList.push({
+  //     price: stripePriceId,
+  //     quantity: quantity,
+  //   });
+  // }
   logger.info(`checkoutItemsReqBody ${JSON.stringify(checkoutItemsReqBody)}`);
-  // const priceId = await createProductAndPrice();
   try {
     const session = await stripe.checkout.sessions.create({
       line_items: itemWithPriceIdList,
@@ -93,9 +91,7 @@ payment.post("/webhook", (req, res) => {
       const paymentIntent = event.data.object;
       const { receipt_email, payment_method, amount } = paymentIntent;
       logger.info("payment_intent.succeeded - payment");
-
       // not everyone can view this kind of info!
-
       // Then define and call a method to handle the successful payment intent.
       // handlePaymentIntentSucceeded(paymentIntent);
       break;
@@ -185,14 +181,8 @@ payment.post("/payment-received", async (req, res) => {
           );
         }
       });
-
-      // res.status(200).json("Your request was proceeded");
     } catch (error) {
       logger.error(JSON.stringify(error));
-
-      // res
-      //   .status(500)
-      //   .json("Sorry but there is an error" + JSON.stringify(error));
     }
   }, 3000);
 });

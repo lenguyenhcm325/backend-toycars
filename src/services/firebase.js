@@ -174,9 +174,27 @@ const addSessionIdToFS = async (sessionId) => {
   }
 };
 
+const createItemsWithPriceId = async (itemsReqBody) => {
+  let itemWithPriceIdList = [];
+  for (const item of itemsReqBody) {
+    const flattenNameWithoutSpace = Object.keys(item)[0];
+    const quantity = item[flattenNameWithoutSpace];
+    const { stripePriceId } = await getPriceAndProductId(
+      flattenNameWithoutSpace
+    );
+    itemWithPriceIdList.push({
+      price: stripePriceId,
+      quantity: quantity,
+    });
+  }
+
+  return itemWithPriceIdList;
+};
+
 module.exports = {
   getAllCarModels,
   getPriceAndProductId,
   existsSessionIdInFS,
   addSessionIdToFS,
+  createItemsWithPriceId,
 };
