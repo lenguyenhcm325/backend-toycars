@@ -8,7 +8,6 @@ const {
   getDoc,
 } = require("firebase/firestore");
 require("dotenv").config();
-require("dotenv").config();
 const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 const parsePriceToFloat = require("../utils/parse-price-to-float");
 const stringNormalizer = require("../utils/string-normalizer");
@@ -135,6 +134,51 @@ const populateWithProductAndPriceId = async () => {
     }
   }
 };
+
+const populateWithShippingAndPriceId = async (shippingArray) => {
+  for (const shippingInfo of shippingArray) {
+    const { image_url, model_brand, description, price } = shippingInfo;
+    const { productId, priceId } = await generateProductAndPriceId(
+      shippingInfo
+    );
+    await setDoc(
+      doc(
+        db,
+        process.env.ALL_PRODUCTS_COLLECTION_NAME,
+        stringNormalizer(model_brand)
+      ),
+      {
+        image_url,
+        model_brand,
+        description,
+        price,
+        stripeProductId: productId,
+        stripePriceId: priceId,
+      }
+    );
+    console.log("done doing for " + model_brand);
+  }
+  console.log("done adding shippings");
+};
+
+const shippingArray = [
+  {
+    image_url:
+      "https://yt3.googleusercontent.com/-GXeJIv-xLmeIh7ENRPQAOlwmz_ru6UOuxaDcpwl74uKiObFf4w2mNelVSeO775keTataf73=s900-c-k-c0x00ffffff-no-rj",
+    model_brand: "Standard Delivery",
+    description: "Costs $3.99 and takes 3 to 5 business days",
+    price: "$3.99",
+  },
+  {
+    image_url:
+      "https://yt3.googleusercontent.com/-GXeJIv-xLmeIh7ENRPQAOlwmz_ru6UOuxaDcpwl74uKiObFf4w2mNelVSeO775keTataf73=s900-c-k-c0x00ffffff-no-rj",
+    model_brand: "Express Delivery",
+    description: "Costs $7.99 and takes 1 business day",
+    price: "$7.99",
+  },
+];
+
+// populateWithShippingAndPriceId(shippingArray);
 
 const existsSessionIdInFS = async (sessionId) => {
   try {
