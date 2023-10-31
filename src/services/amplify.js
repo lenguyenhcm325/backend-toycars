@@ -1,3 +1,4 @@
+// NOT CURRENTLY USED
 const { Auth, Amplify } = require("aws-amplify");
 require("dotenv").config();
 

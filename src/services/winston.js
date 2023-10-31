@@ -18,6 +18,7 @@ module.exports = (meta_url) => {
   const root = resolve("./");
   const file_path = meta_url.replace(root, "");
 
+  // Log both the level and file path for enhanced debugging in case of error
   const customFormat = printf(({ level, message, timestamp, stack }) => {
     return ` [${level}] ${file_path}: ${stack || message}`;
   });

@@ -2,12 +2,9 @@ const express = require("express");
 const path = require("path");
 
 require("dotenv").config();
-const jwt = require("jsonwebtoken");
-const cookieParser = require("cookie-parser");
 const { getAllCarModels } = require("../services/firebase");
 const cognitoAuth = require("../services/cognito");
 const { brandPriceFilterSort } = require("../services/elasticsearch");
-const { appCheckMiddleware } = require("../services/firebase-app-check");
 const api = express.Router();
 const Logger = require("../services/winston.js");
 const logger = Logger(__filename);
@@ -28,6 +25,7 @@ api.get("/cars", async function (req, res, next) {
 });
 module.exports = api;
 
+// NOT CURRENTLY IN USE
 api.post("/signup", async (req, res) => {
   const { username, password, email, given_name, family_name } = req.body;
 

@@ -1,6 +1,5 @@
-const stripe = require("stripe")(
-  "sk_test_51MoA4lBGR5DYC28pDCRG8b01cH1ZPp6EYDqkcqH1WrktuCmSQ68G1a3kpjrVy23ke96zJeASGqYE1fT4micUpsCk00wwigqNcn"
-);
+require("dotenv").config();
+const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 
 async function listPaymentIntents() {
   const paymentIntents = await stripe.paymentIntents.list({

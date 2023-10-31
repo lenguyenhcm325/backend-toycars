@@ -1,3 +1,4 @@
+// NOT CURRENTLY USED
 var AmazonCognitoIdentity = require("amazon-cognito-identity-js");
 var CognitoUserPool = AmazonCognitoIdentity.CognitoUserPool;
 require("dotenv").config();
