@@ -36,10 +36,6 @@ const appCheckMiddleware = async (req, res, next) => {
   }
 };
 
-// expressApp.get("/yourApiEndpoint", [appCheckMiddleware], (req, res) => {
-//   // Handle request.
-// });
-
 module.exports = {
   appCheckMiddleware,
 };

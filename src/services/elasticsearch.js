@@ -181,67 +181,6 @@ const brandPriceFilterSort = async ({
   return result.hits.hits;
 };
 
-// brandPriceFilterSort({
-//   searchQuery: "fun",
-//   minPrice: 0,
-//   maxPrice: 30,
-//   brand: undefined,
-//   sortOrder: "asc",
-// });
-
 module.exports = {
   brandPriceFilterSort,
 };
-
-// old QUERY
-// const result = await client.search({
-//   query: {
-//     bool: {
-//       must: [
-//         {
-//           bool: {
-//             minimum_should_match: 1,
-//             should: [
-//               {
-//                 match: {
-//                   description: {
-//                     query: searchQuery,
-//                     fuzziness: "AUTO",
-//                   },
-//                 },
-//               },
-//               {
-//                 match: {
-//                   model_brand: {
-//                     query: searchQuery,
-//                     fuzziness: "AUTO",
-//                   },
-//                 },
-//               },
-//             ],
-//             filter: {
-//               range: {
-//                 price: {
-//                   gte: minPrice,
-//                   lte: maxPrice,
-//                 },
-//               },
-//             },
-//           },
-//         },
-//         {
-//           match: {
-//             brand_name: brand,
-//           },
-//         },
-//       ],
-//     },
-//   },
-//   sort: [
-//     {
-//       price: {
-//         order: sortOrder,
-//       },
-//     },
-//   ],
-// });

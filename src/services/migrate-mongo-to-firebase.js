@@ -42,7 +42,6 @@ async function getAllEntries(databaseName, collectionName) {
       });
       console.log("Document written with ID: ", brandDocRef.id);
     }
-    // return result;
   } catch (error) {
     console.log("Error retrieving data: ", error);
   } finally {
@@ -56,21 +55,3 @@ async function doWork(databaseName, collectionName) {
 }
 
 doWork("dev-toycars", "toycars-info");
-
-// const dummy = async (databaseName, collectionName) => {
-//   try {
-//     result = [];
-//     const database = client.db(databaseName);
-//     const collection = database.collection(collectionName);
-//     const cursor = collection.find({});
-//     for await (const doc of cursor) {
-//       result.push(doc);
-//       //   this part
-//     }
-//     return result;
-//   } catch (error) {
-//     console.log("Error retrieving data: ", error);
-//   } finally {
-//     await client.close();
-//   }
-// };

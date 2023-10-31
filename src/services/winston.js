@@ -1,5 +1,3 @@
-// // const {createLogger, format} = require("winston");
-// const winston = require("winston");
 const WinstonCloudWatch = require("winston-cloudwatch");
 const crypto = require("crypto");
 require("dotenv").config();
@@ -8,41 +6,6 @@ require("dotenv").config();
 // // TODO: error does not include stack trace by default
 
 let startTime = new Date().toISOString();
-
-// const logger = winston.createLogger({
-//   level: "debug",
-//   transports: [
-//     new winston.transports.Console(),
-//     new WinstonCloudWatch({
-//       level: "debug",
-//       ensureLogGroup: true,
-//       logGroupName: "toycars-loggroup",
-//       logStreamName: function () {
-//         let date = new Date().toISOString().split("T")[0];
-//         return (
-//           "toycars-" +
-//           date +
-//           "-" +
-//           crypto.createHash("md5").update(startTime).digest("hex")
-//         );
-//       },
-//       awsOptions: {
-//         credentials: {
-//           accessKeyId: "AKIAURNPQOHOLOVFHXVF",
-//           secretAccessKey: "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",
-//         },
-//         region: "eu-central-1",
-//       },
-//     }),
-//   ],
-// });
-
-// // logger.info("This is an info message1.");
-// // logger.debug("This is a debug message1.");
-// // logger.warn("This is a warning message1.");
-// // logger.error("This is an error message1.");
-// // console.log("hello");
-// module.exports = logger;
 
 const winston = require("winston");
 const { resolve } = require("path");
@@ -96,7 +59,7 @@ module.exports = (meta_url) => {
     ],
   });
 
-  // Log also to console if not in production
+  //TODO Log also to console if not in production
 
   return loggerInstance;
 };

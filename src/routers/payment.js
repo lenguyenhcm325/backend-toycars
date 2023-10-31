@@ -20,18 +20,6 @@ payment.post("/create-checkout-session", async (req, res) => {
   const checkoutItemsReqBody = req.body;
   logger.info(`checkoutItemsReqBody ${JSON.stringify(checkoutItemsReqBody)}`);
   let itemWithPriceIdList = await createItemsWithPriceId(checkoutItemsReqBody);
-
-  // for (const item of checkoutItemsReqBody) {
-  //   const flattenNameWithoutSpace = Object.keys(item)[0];
-  //   const quantity = item[flattenNameWithoutSpace];
-  //   const { stripePriceId } = await getPriceAndProductId(
-  //     flattenNameWithoutSpace
-  //   );
-  //   itemWithPriceIdList.push({
-  //     price: stripePriceId,
-  //     quantity: quantity,
-  //   });
-  // }
   logger.info(`checkoutItemsReqBody ${JSON.stringify(checkoutItemsReqBody)}`);
   try {
     const session = await stripe.checkout.sessions.create({

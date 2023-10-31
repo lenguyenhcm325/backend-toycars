@@ -8,7 +8,6 @@ async function run() {
     await client.connect();
     const database = client.db("dev-toycars");
     const toyCars = database.collection("toycars-info");
-    // Query for a movie that has the title 'Back to the Future'
     const query = { brand_name: "UrbanX" };
     const toyCar = await toyCars.findOne(query);
   } finally {

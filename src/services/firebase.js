@@ -13,7 +13,6 @@ const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 const parsePriceToFloat = require("../utils/parse-price-to-float");
 const stringNormalizer = require("../utils/string-normalizer");
 const { initializeApp } = require("firebase/app");
-// const { loggers } = require("winston");
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -98,7 +97,7 @@ const getPriceAndProductId = async (flattenNameWithoutSpace) => {
 
       return { stripePriceId, stripeProductId };
     }
-    // stripePriceId
+
     throw new Error("invalid item");
   } catch (error) {
     console.error(error);
@@ -113,12 +112,6 @@ const populateWithProductAndPriceId = async () => {
     db,
     process.env.ALL_PRODUCTS_COLLECTION_NAME
   );
-  // allCarModelsByBrand.forEach((modelsEachBrand, index) => {
-  //   modelsArray = modelsEachBrand["car_models"];
-  //   modelsArray.forEach((modelInfo) => {
-
-  //   });
-  // });
   for (const modelsEachBrand of allCarModelsByBrand) {
     modelsArray = modelsEachBrand["car_models"];
     for (const modelInfo of modelsArray) {

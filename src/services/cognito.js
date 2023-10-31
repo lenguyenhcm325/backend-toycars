@@ -2,8 +2,6 @@ var AmazonCognitoIdentity = require("amazon-cognito-identity-js");
 var CognitoUserPool = AmazonCognitoIdentity.CognitoUserPool;
 require("dotenv").config();
 let Auth = require("./amplify");
-console.log("this is the userpoolid");
-console.log(process.env.USER_POOL_ID);
 var poolData = {
   UserPoolId: process.env.USER_POOL_ID, // Your user pool id here
   ClientId: process.env.USER_POOL_WEB_CLIENT_ID, // Your client id here
@@ -52,23 +50,7 @@ const createUserWithUsernameAndPassword = ({
     function (err, result) {
       if (err) {
         alert(err.message || JSON.stringify(err));
-        // throw new Error(err.message || JSON.stringify(err));
       }
-      //   var cognitoUser = result.user;
-
-      //   console.log("user name is " + cognitoUser.getUsername());
-      //   cognitoUser.getUserAttributes((err, attributes) => {
-      //     if (err) {
-      //       throw new Error(err.message || JSON.stringify(err));
-      //     }
-      //     for (const attribute of attributes) {
-      //       if (attribute.getName() === "sub") {
-      //         const userId = attribute.getValue();
-      //         console.log("User ID:", userId);
-      //         break;
-      //       }
-      //     }
-      //   });
     }
   );
 };

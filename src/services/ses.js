@@ -29,15 +29,6 @@ const htmlData = `
 
 const client = new SESv2Client(config);
 
-// async function doStuff() {
-//   const command = new SendEmailCommand(input);
-//   const response = await client.send(command);
-//   return response;
-// }
-
-// const result1 = doStuff();
-// console.log(result1);
-
 const sendEmail = async ({ receiver, emailHTML, subject }) => {
   const input = {
     // SendEmailRequests

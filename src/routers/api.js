@@ -49,7 +49,7 @@ api.post("/signup", async (req, res) => {
   }
 });
 
-// NOT IN USE
+// NOT CURRENTLY IN USE
 api.post("/confirm-signup", async function (req, res, next) {
   const { confirmationCode, username } = req.body;
 
@@ -63,52 +63,12 @@ api.post("/confirm-signup", async function (req, res, next) {
   }
 });
 
-// NOT IN USE
-// api.post("/set-cookie", (req, res) => {
-//   const { accessKeyId, secretAccessKey, sessionToken } = req.body;
-//   res.cookie("accessKeyId", accessKeyId, {
-//     httpOnly: true,
-//     expires: new Date(Date.now() + 3600000),
-//   });
-//   res.cookie("secretAccessKey", secretAccessKey, {
-//     httpOnly: true,
-//     expires: new Date(Date.now() + 3600000),
-//   });
-//   res.cookie("sessionToken", sessionToken, {
-//     httpOnly: true,
-//     expires: new Date(Date.now() + 3600000),
-//   });
-
-//   res.status(200).send("Token is now HttpOnly cookie.");
-// });
-
-// NOT IN USE
-// api.get("/test-route", (req, res) => {
-//   console.log("Request Headers:", req.headers);
-//   const accessKeyIdCookie = req.cookies.accessKeyId;
-//   const secretAccessKeyCookie = req.cookies.secretAccessKey;
-//   const sessionTokenCookie = req.cookies.sessionToken;
-//   res.status(200).send({
-//     message: "good",
-//     accessKeyIdCookie: req.cookies.accessKeyId,
-//     secretAccessKeyCookie: req.cookies.secretAccessKey,
-//     sessionTokenCookie: req.cookies.sessionToken,
-//   });
-// });
-
 api.get("/search", async (req, res) => {
   let minPrice = undefined;
   let maxPrice = undefined;
   let brand = undefined;
   let searchQuery = undefined;
   let sortOrder = "asc";
-  // brandPriceFilterSort({
-  //   searchQuery: "fun",
-  //   minPrice: 0,
-  //   maxPrice: 30,
-  //   brand: undefined,
-  //   sortOrder: "asc",
-  // });
   if (req.query.priceRange && req.query.priceRange !== "") {
     const priceRange = req.query.priceRange;
     const priceParts = priceRange.split("-");

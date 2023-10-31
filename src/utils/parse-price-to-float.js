@@ -5,13 +5,4 @@ function parsePriceToFloat(inputString) {
   return roundedNumber;
 }
 
-// Example usage:
-const inputString = "A23.45678";
-const result = parsePriceToFloat(inputString);
-if (!isNaN(result)) {
-  console.log(`Parsed number: ${result}`);
-} else {
-  console.log("Invalid input string.");
-}
-
 module.exports = parsePriceToFloat;
