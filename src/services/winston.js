@@ -50,8 +50,8 @@ module.exports = (meta_url) => {
         },
         awsOptions: {
           credentials: {
-            accessKeyId: "AKIAURNPQOHOLOVFHXVF",
-            secretAccessKey: "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",
+            accessKeyId: process.env.IAM_ACCESS_KEY_ID,
+            secretAccessKey: process.env.IAM_SECRET_ACCESS_KEY,
           },
           region: "eu-central-1",
         },
