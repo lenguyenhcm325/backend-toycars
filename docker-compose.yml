@@ -15,7 +15,6 @@ services:
       timeout: 5s
       retries: 3
       start_period: 15s
-
   backend:
     image: 312290079196.dkr.ecr.eu-central-1.amazonaws.com/toycars-backend:toycars-backend-img
     env_file:
@@ -47,8 +46,6 @@ services:
     depends_on:
       - frontend
       - backend
-
-  
 
 networks:
   appnetwork:

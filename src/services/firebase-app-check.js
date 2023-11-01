@@ -17,8 +17,6 @@ const firebaseApp = initializeApp(firebaseConfig);
 const appCheckMiddleware = async (req, res, next) => {
   const appCheckToken = req.header("X-Firebase-AppCheck");
 
-  console.log(appCheckToken);
-
   if (!appCheckToken) {
     res.status(401);
     return next("Unauthorized");
