@@ -100,11 +100,11 @@ payment.post("/payment-received", async (req, res) => {
   // are registered in their database, 3s seem to be a sweet interval
   setTimeout(async () => {
     try {
-      let totalPrice;
       // return 3 PaymentIntent entries
       const results = await stripeAPI.listPaymentIntents();
       logger.info(`return 3 PaymentIntent ${JSON.stringify(results)} `);
       results.data.forEach(async (paymentIntent) => {
+        let totalPrice;
         if (paymentIntent.metadata.alreadySentMail) {
         } else {
           logger.info(
