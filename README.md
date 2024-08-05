@@ -1,13 +1,5 @@
 # Toy Cars Store Project - Backend Repository
 
-## :star: [Click here for the Live Version](http://18.194.12.173/) :star:
-
-For the best experience, please use in full-screen mode as the web application is more optimized for larger displays.  
-Test login credentials:
-
-- Email: max.mustermann@mail.de
-- Password: 12345678
-
 ## Features
 
 ### Deployed along with the frontend on EC2 Instance using Docker Swarm
